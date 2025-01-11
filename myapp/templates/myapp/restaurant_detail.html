@@ -1,0 +1,42 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<h1>{{ restaurant.name }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <h3>О ресторане</h3>
+        <p>{{ restaurant.description }}</p>
+        <p><strong>Адрес:</strong> {{ restaurant.address }}</p>
+        <p><strong>Телефон:</strong> {{ restaurant.phone }}</p>
+        <p><strong>Время работы:</strong> {{ restaurant.opening_hours }}</p>
+        <p><strong>Рейтинг:</strong> {{ restaurant.rating }}/5</p>
+
+        <h3 class="mt-4">Меню</h3>
+        <div class="row">
+            {% for item in menu_items %}
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text"><strong>Цена:</strong> {{ item.price }} руб.</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-4">Отзывы</h3>
+        {% for review in reviews %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ review.author_name }}</h5>
+                <p class="card-text">Оценка: {{ review.rating }}/5</p>
+                <p class="card-text">{{ review.comment }}</p>
+                <small class="text-muted">{{ review.created_at|date }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
